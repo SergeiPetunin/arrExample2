@@ -68,9 +68,7 @@ public class ArrExample2 {
                 i[j] = rand.nextInt(n)+1;
             }
         }
-        
         for (int i = 0; i < nums3.length; i++) {
-            
             //1строка
             strSum1 += nums3[0][i];
             //2строка
@@ -81,20 +79,6 @@ public class ArrExample2 {
             strSum4 += nums3[3][i];
             //5строка
             strSum5 += nums3[4][i];
-            
-            for (int j = 0; j < nums3[i].length; j++)
-            {
-                System.out.printf("%3d", nums3[i][j]);
-            }
-            System.out.print("\t| lineSum = ");
-            System.out.println("");
-            
-        }
-        
-        
-        for (int i = 0; i < nums3.length; i++) {
-            //сумма минимальное максимально весь массив
-            
             //1столбец
             colSum1 += nums3[i][0];
             //2столбец
@@ -105,6 +89,17 @@ public class ArrExample2 {
             colSum4 += nums3[i][3];
             //5столбец
             colSum5 += nums3[i][4];
+            
+            for (int j = 0; j < nums3[i].length; j++)
+            {
+                System.out.printf("%3d", nums3[i][j]);
+            }
+            System.out.print("\t| lineSum = ");
+            System.out.println("");
+            
+        }
+        
+        for (int i = 0; i < nums3.length; i++) {
             //диагонали1 вниз с слево на право
             sumDiag1 += nums3[i][i];
             if(minDiag1 > nums3[i][i])minDiag1 = nums3[i][i];
