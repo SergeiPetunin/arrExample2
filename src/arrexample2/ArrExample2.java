@@ -103,6 +103,7 @@ public class ArrExample2 {
                 if(maxColumn[j] < nums3[i][j])maxColumn[j] = nums3[i][j];
                 
             }
+            
             System.out.println("");
         }
 //-----------------------------------------------------------------------------
