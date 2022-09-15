@@ -19,7 +19,7 @@ public class ArrExample2 {
      */
     public static void main(String[] args) {
         Random rand = new Random();
-        System.out.println("--- Одномерный массив ---");
+        System.out.println("---- Одномерный массив ----");
         int[] nums = new int[10];
         for (int i = 0; i < nums.length; i++) {
             nums[i] = rand.nextInt(20)+(-10);
@@ -57,13 +57,10 @@ public class ArrExample2 {
         int max2d = 0;
         int strSum1 = 0, strSum2 = 0, strSum3 = 0, strSum4 = 0, strSum5 = 0;
         int colSum1 = 0, colSum2 = 0, colSum3 = 0, colSum4 = 0, colSum5 = 0;
-        int minStr1 = 10,minStr2 = 10,minStr3 = 10,minStr4 = 10,minStr5 = 10;
-        int maxStr1 = 0, maxStr2 = 0, maxStr3 = 0, maxStr4 = 0, maxStr5 = 0;
-        int maxCol1 = 0,maxCol2 = 0,maxCol3 = 0,maxCol4 = 0,maxCol5 = 0;
-        int minCol1 = 10, minCol2 = 10, minCol3 = 10, minCol4 = 10, minCol5 = 10;
         int sumDiag1 = 0, sumDiag2 = 0;
         int minDiag1 = 10, minDiag2 = 10;
         int maxDiag1 = 0, maxDiag2 = 0;
+        
         int n = 5;
         int[][] nums3 = new int[n][n];
         for (int[] i : nums3) {
@@ -73,14 +70,7 @@ public class ArrExample2 {
         }
         
         for (int i = 0; i < nums3.length; i++) {
-            for (int j = 0; j < nums3[i].length; j++) {
-                System.out.printf("%3d", nums3[i][j]);
-            }
-            System.out.println("");
-        }
-        
-        for (int i = 0; i < nums3.length; i++) {
-            //сумма минимальное максимально весь массив
+            
             //1строка
             strSum1 += nums3[0][i];
             //2строка
@@ -91,6 +81,20 @@ public class ArrExample2 {
             strSum4 += nums3[3][i];
             //5строка
             strSum5 += nums3[4][i];
+            
+            for (int j = 0; j < nums3[i].length; j++)
+            {
+                System.out.printf("%3d", nums3[i][j]);
+            }
+            System.out.print("\t| lineSum = ");
+            System.out.println("");
+            
+        }
+        
+        
+        for (int i = 0; i < nums3.length; i++) {
+            //сумма минимальное максимально весь массив
+            
             //1столбец
             colSum1 += nums3[i][0];
             //2столбец
@@ -124,25 +128,17 @@ public class ArrExample2 {
         System.out.println("");
         
         System.out.println("Сумма 1 строки: " + strSum1);
-      
         System.out.println("Сумма 2 строки: " + strSum2);
-
         System.out.println("Сумма 3 строки: " + strSum3);
-
         System.out.println("Сумма 4 строки: " + strSum4);
-
         System.out.println("Сумма 5 строки: " + strSum5);
         System.out.println("");
         
         
         System.out.println("Сумма 1 столбца: " + colSum1);
-
         System.out.println("Сумма 2 столбца: " + colSum2);
-
         System.out.println("Сумма 3 столбца: " + colSum3);
-
         System.out.println("Сумма 4 столбца: " + colSum4);
-
         System.out.println("Сумма 5 столбца: " + colSum5);
         System.out.println("");
 
