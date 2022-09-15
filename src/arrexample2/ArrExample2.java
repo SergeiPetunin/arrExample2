@@ -5,6 +5,7 @@
  */
 package arrexample2;
 
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -49,103 +50,116 @@ public class ArrExample2 {
         System.out.println("sum " + sum);
         System.out.println("min " + min);
         System.out.println("max " + max);
-        
+ //_________________________________________________________________________
+ //*************************************************************************
         //----------------------------------------------------
         System.out.println("--- Двухмерный массив ---");
         int sum2d = 0;
         int min2d = 10;
         int max2d = 0;
-        int strSum1 = 0, strSum2 = 0, strSum3 = 0, strSum4 = 0, strSum5 = 0;
-        int colSum1 = 0, colSum2 = 0, colSum3 = 0, colSum4 = 0, colSum5 = 0;
-        int sumDiag1 = 0, sumDiag2 = 0;
-        int minDiag1 = 10, minDiag2 = 10;
-        int maxDiag1 = 0, maxDiag2 = 0;
         
-        int n = 5;
+        int sumString = 0;
+        int summDiagDown = 0;
+        int summDiagUp = 0;
+
+        int n = 3;
+        int count = n;
+        int rnd = 9;
+        
         int[][] nums3 = new int[n][n];
         for (int[] i : nums3) {
             for (int j = 0; j < i.length; j++) {
-                i[j] = rand.nextInt(n)+1;
+                i[j] = rand.nextInt(rnd)+1;
             }
         }
+        
+//-----------------------------------------------------------------------------
+        int[] minString = new int[nums3.length];
+        Arrays.fill(minString, rnd);
+        int[] maxString = new int[nums3.length];
+        int[] minColumn = new int[nums3.length];
+        Arrays.fill(minColumn, rnd);
+        int[] maxColumn = new int[nums3.length];
+        int minDiagDown = rnd;
+        int maxDiagDown = 0;
+        int minDiagUp = rnd;
+        int maxDiagUp = 0;
         for (int i = 0; i < nums3.length; i++) {
-            //1строка
-            strSum1 += nums3[0][i];
-            //2строка
-            strSum2 += nums3[1][i];
-            //3строка
-            strSum3 += nums3[2][i];
-            //4строка
-            strSum4 += nums3[3][i];
-            //5строка
-            strSum5 += nums3[4][i];
-            //1столбец
-            colSum1 += nums3[i][0];
-            //2столбец
-            colSum2 += nums3[i][1];
-            //3столбец
-            colSum3 += nums3[i][2];
-            //4столбец
-            colSum4 += nums3[i][3];
-            //5столбец
-            colSum5 += nums3[i][4];
+            summDiagDown += nums3[i][i];// сумма диагонали
+            if(minDiagDown > nums3[i][i])minDiagDown = nums3[i][i];
+            if(maxDiagDown < nums3[i][i])maxDiagDown = nums3[i][i];
+            summDiagUp += nums3[i][nums3.length - 1 - i];// сумма диагонали
+            if(minDiagUp > nums3[i][nums3.length - 1 - i])minDiagUp = nums3[i][nums3.length - 1 - i];
+            if(maxDiagUp < nums3[i][nums3.length - 1 - i])maxDiagUp = nums3[i][nums3.length - 1 - i];
+            
+            for (int j = 0; j < nums3[i].length; j++)
+            {
+                sum2d += nums3[i][j];// сумма всего массива
+                if(min2d > nums3[i][j])min2d = nums3[i][j]; //минимальное массива
+                if(max2d < nums3[i][j])max2d = nums3[i][j]; //Максимальное массива
+                if(minString[i] > nums3[i][j])minString[i] = nums3[i][j];
+                if(maxString[i] < nums3[i][j])maxString[i] = nums3[i][j];
+                if(minColumn[j] > nums3[i][j])minColumn[j] = nums3[i][j];
+                if(maxColumn[j] < nums3[i][j])maxColumn[j] = nums3[i][j];
+                
+            }
+            System.out.println("");
+        }
+//-----------------------------------------------------------------------------
+//------------получим результат каждой строки  и сохраним в массиве
+        //создаем массив размером nums3.length
+        int[] strResult = new int[nums3.length];
+        int[] colResult = new int[nums3.length];
+        
+        //Цикл по первому измерению
+        for (int i = 0; i < nums3.length; i++) { 
+            //Для каждой строки вычислите сумму и сохраните ее в сумме
+            for (int j = 0; j < nums3[i].length; j++) {
+                strResult[i] += nums3[i][j];
+                colResult[j] += nums3[i][j];
+            }
+        }
+        
+        System.out.println("");
+        for (int i = 0; i < nums3.length; i++) {
             
             for (int j = 0; j < nums3[i].length; j++)
             {
                 System.out.printf("%3d", nums3[i][j]);
             }
-            System.out.print("\t| lineSum = ");
-            System.out.println("");
-            
+                System.out.printf(" | sum:%4d min:%4d max:%4d", strResult[i], minString[i], maxString[i]);
+                System.out.println("");
         }
-        
         for (int i = 0; i < nums3.length; i++) {
-            //диагонали1 вниз с слево на право
-            sumDiag1 += nums3[i][i];
-            if(minDiag1 > nums3[i][i])minDiag1 = nums3[i][i];
-            if(maxDiag1 < nums3[i][i])maxDiag1 = nums3[i][i];
-            //диагонали2 вверх
-            sumDiag2 += nums3[i][nums3.length - 1 - i];
-            if(minDiag2 > nums3[i][nums3.length - 1 - i])minDiag2 = nums3[i][nums3.length - 1 - i];
-            if(maxDiag2 < nums3[i][nums3.length - 1 - i])maxDiag2 = nums3[i][nums3.length - 1 - i];
-            
-            for (int j = 0; j < nums3[i].length; j++) {
-                //весь массив
-                sum2d += nums3[i][j];
-                if(min2d > nums3[i][j])min2d = nums3[i][j];
-                if(max2d < nums3[i][j])max2d = nums3[i][j];   
-            }
+            System.out.print("---");
         }
-        
+        System.out.println("");
+
+        for (int i :colResult){
+            System.out.printf("%3d", i);
+        }
+        System.out.println("");
+        for (int i : minColumn){
+            System.out.printf("%3d", i);
+        }
+        System.out.println("");
+        for (int i : maxColumn){
+            System.out.printf("%3d", i);
+        }
+        System.out.println("");
         System.out.print("Сумма всего массива: " + sum2d);
         System.out.print("\t\tМинимальное массива: " + min2d);
         System.out.println("\t\tМаксимальное массива: " + max2d);
         System.out.println("");
-        
-        System.out.println("Сумма 1 строки: " + strSum1);
-        System.out.println("Сумма 2 строки: " + strSum2);
-        System.out.println("Сумма 3 строки: " + strSum3);
-        System.out.println("Сумма 4 строки: " + strSum4);
-        System.out.println("Сумма 5 строки: " + strSum5);
-        System.out.println("");
-        
-        
-        System.out.println("Сумма 1 столбца: " + colSum1);
-        System.out.println("Сумма 2 столбца: " + colSum2);
-        System.out.println("Сумма 3 столбца: " + colSum3);
-        System.out.println("Сумма 4 столбца: " + colSum4);
-        System.out.println("Сумма 5 столбца: " + colSum5);
-        System.out.println("");
 
-        System.out.print("Сумма диагонали 1 : " + sumDiag1);
-        System.out.print("\tМинимальное диагонали 1 : " + minDiag1);
-        System.out.println("\tМаксимальное диагонали 1 : " + maxDiag1);
+        System.out.print("Сумма диагонали 1 : " + summDiagDown);
+        System.out.print("\tМинимальное диагонали 1 : " + minDiagDown);
+        System.out.println("\tМаксимальное диагонали 1 : " + maxDiagDown);
         
-        
-        System.out.print("Сумма диагонали 2 : " + sumDiag2);
-        System.out.print("\tМинимальное диагонали 2 : " + minDiag2);
-        System.out.println("\tМаксимальное диагонали 2 : " + maxDiag2);
-        
+        System.out.print("Сумма диагонали 2 : " + summDiagUp);
+        System.out.print("\tМинимальное диагонали 2 : " + minDiagUp);
+        System.out.println("\tМаксимальное диагонали 2 : " + maxDiagUp);
+        System.out.println("");
     }
     
 }
